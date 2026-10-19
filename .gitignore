@@ -1,0 +1,10 @@
+# generated or downloaded locally
+models
+cache
+work
+preview
+qa
+node_modules
+__pycache__/
+*.pyc
+.DS_Store
