@@ -21,6 +21,35 @@ Each MP4 has chapters and an embedded subtitle track. The same subtitles are in 
 
 [`STUDY_GUIDE.md`](STUDY_GUIDE.md) is the written companion. It has every concept the practice midterms test, worked exam questions, new practice problems with answers, all 43 multiple-choice answers with reasons, and a note-sheet blueprint.
 
+## How the videos are made
+
+Each lesson is a Python file (`v01.py` … `v08.py`) that lists scenes. A scene is an HTML layout plus narrated steps.
+
+1. `tts.py` voices each step with [Kokoro](https://github.com/thewh1teagle/kokoro-onnx) (voice `af_heart`). It spells out decimals and acronyms so they're read correctly, and caches the audio.
+2. `vf.py` renders each step's frame in headless Chromium (Playwright). Animated steps get one frame per change.
+3. `vf.py` then crossfades the frames and encodes a variable-frame-rate H.264 MP4 with ffmpeg, adding the narration, chapters and subtitles.
+
+`preview.py` renders every step as stills for a quick layout check. `qa.py` checks that video and audio lengths match and transcribes the narration with faster-whisper.
+
+### Rebuild
+
+Requirements: Python 3.11+, Node 18+, ffmpeg.
+
+```bash
+pip install -r requirements.txt
+python -m playwright install chromium
+npm install
+mkdir -p models
+curl -L -o models/kokoro-v1.0.onnx https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+curl -L -o models/voices-v1.0.bin https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
+
+python preview.py v03        # layout check -> preview/v03-linreg/sheet*.png
+python v03.py                # build one video -> videos/
+./build_all.sh               # build all eight
+```
+
+A full build takes about 4 to 7 minutes per video on 2 CPU cores, mostly narration.
+
 ## Source
 
 The exam questions, datasets and R output quoted in the lessons come from the IEOR 142 (UC Berkeley) Spring 2021 practice midterms.
