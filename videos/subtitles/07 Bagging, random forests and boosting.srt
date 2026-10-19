@@ -1,0 +1,243 @@
+1
+00:00:00,600 --> 00:00:02,541
+Ensembles combine many trees.
+
+2
+00:00:02,541 --> 00:00:06,690
+Bagging and random forests average deep trees to cut variance.
+
+3
+00:00:06,690 --> 00:00:10,171
+Boosting adds small trees one at a time to cut bias.
+
+4
+00:00:10,171 --> 00:00:14,253
+The exam tests which is which, plus two buggy-code questions.
+
+5
+00:00:15,867 --> 00:00:18,440
+Bagging, short for bootstrap aggregating,
+
+6
+00:00:18,440 --> 00:00:23,149
+draws B bootstrap samples from the training set, grows a deep tree on each,
+
+7
+00:00:23,149 --> 00:00:26,225
+then averages their predictions, or takes a vote.
+
+8
+00:00:26,225 --> 00:00:28,924
+Deep trees have low bias but high variance,
+
+9
+00:00:28,924 --> 00:00:31,749
+and averaging many of them cuts the variance.
+
+10
+00:00:32,520 --> 00:00:38,026
+So, true or false: the main purpose of bagging is to estimate out of sample error.
+
+11
+00:00:38,026 --> 00:00:38,429
+False.
+
+12
+00:00:38,429 --> 00:00:40,041
+It's to reduce variance.
+
+13
+00:00:40,041 --> 00:00:43,532
+The out of bag error estimate is a handy by-product.
+
+14
+00:00:45,133 --> 00:00:48,799
+A random forest is bagging plus one twist: at each split,
+
+15
+00:00:48,799 --> 00:00:53,043
+the tree may only consider a random subset of m features out of p.
+
+16
+00:00:53,043 --> 00:00:57,416
+That stops every tree from using the same strong feature at the top,
+
+17
+00:00:57,416 --> 00:01:01,531
+so the trees are less correlated, and averaging them helps more.
+
+18
+00:01:02,287 --> 00:01:07,529
+Practice midterm one asks why random forest trees are less correlated: the
+
+19
+00:01:07,529 --> 00:01:11,072
+bootstrap samples, and the random feature subsets.
+
+20
+00:01:11,072 --> 00:01:12,135
+Both, answer C.
+
+21
+00:01:12,135 --> 00:01:15,748
+And if m equals p, a random forest is just bagging.
+
+22
+00:01:17,333 --> 00:01:19,025
+Boosting works differently.
+
+23
+00:01:19,025 --> 00:01:21,281
+It builds small trees one at a time,
+
+24
+00:01:21,281 --> 00:01:25,793
+and each new tree is fit to the errors the current ensemble still makes,
+
+25
+00:01:25,793 --> 00:01:28,363
+then added in with a small learning rate.
+
+26
+00:01:28,363 --> 00:01:30,493
+It learns slowly, which cuts bias.
+
+27
+00:01:31,253 --> 00:01:32,965
+Three true or false facts.
+
+28
+00:01:32,965 --> 00:01:38,166
+Boosting is inherently sequential, while random forests can train every tree in
+
+29
+00:01:38,166 --> 00:01:39,153
+parallel: true.
+
+30
+00:01:39,153 --> 00:01:44,090
+Boosting works because each tree is very large: false, it uses small trees.
+
+31
+00:01:44,090 --> 00:01:49,620
+And the number of splits per tree is a setting you tune with cross-validation: true.
+
+32
+00:01:51,233 --> 00:01:53,491
+Here's the comparison to memorize.
+
+33
+00:01:53,491 --> 00:01:58,073
+Bagging and random forests train independent deep trees, in parallel,
+
+34
+00:01:58,073 --> 00:01:59,135
+to cut variance.
+
+35
+00:01:59,135 --> 00:02:02,589
+Boosting trains small trees in sequence to cut bias.
+
+36
+00:02:03,353 --> 00:02:08,610
+The overfitting question: adding more trees to a random forest doesn't overfit; it
+
+37
+00:02:08,610 --> 00:02:09,828
+just averages more.
+
+38
+00:02:09,828 --> 00:02:12,329
+But more boosting rounds eventually do,
+
+39
+00:02:12,329 --> 00:02:15,598
+and so does adding quadratic terms to a regression.
+
+40
+00:02:15,598 --> 00:02:20,278
+That's why the answer to practice midterm three, question thirteen, is B.
+
+41
+00:02:20,278 --> 00:02:25,022
+And no method always wins: a linear model can beat a forest out of sample.
+
+42
+00:02:26,633 --> 00:02:31,407
+Practice midterm two has a programming bug: bagging that samples without
+
+43
+00:02:31,407 --> 00:02:32,202
+replacement.
+
+44
+00:02:32,202 --> 00:02:37,506
+Drawing n rows from n rows without replacement just reshuffles the training set.
+
+45
+00:02:37,506 --> 00:02:41,749
+So every tree is identical, and their average is that same tree.
+
+46
+00:02:41,749 --> 00:02:47,052
+The bagged model performs exactly like a single CART tree with cp equal to zero.
+
+47
+00:02:47,820 --> 00:02:51,823
+Now a random forest with the same bug, with m smaller than p.
+
+48
+00:02:51,823 --> 00:02:57,007
+The data never changes, but each split still draws a random subset of features,
+
+49
+00:02:57,007 --> 00:02:58,320
+so the trees differ.
+
+50
+00:02:58,320 --> 00:03:00,813
+Averaging them still reduces variance.
+
+51
+00:03:00,813 --> 00:03:05,473
+Expect performance at least as good as CART with cp zero in most cases,
+
+52
+00:03:05,473 --> 00:03:10,001
+and often better, though less of a gain than a correct random forest.
+
+53
+00:03:11,600 --> 00:03:12,130
+To recap.
+
+54
+00:03:12,130 --> 00:03:16,488
+Bagging averages deep trees grown on bootstrap samples, to lower variance.
+
+55
+00:03:16,488 --> 00:03:20,198
+A random forest adds a random subset of features at each split,
+
+56
+00:03:20,198 --> 00:03:22,553
+and with m equal to p it's just bagging.
+
+57
+00:03:22,553 --> 00:03:26,675
+Boosting adds small trees in sequence, each fit to the current errors.
+
+58
+00:03:26,675 --> 00:03:30,327
+More forest trees don't overfit, but more boosting rounds can.
+
+59
+00:03:30,327 --> 00:03:33,212
+And if the bootstrap samples without replacement,
+
+60
+00:03:33,212 --> 00:03:35,568
+bagging collapses to a single CART tree.
+
+61
+00:03:35,568 --> 00:03:38,335
+Next: the smaller topics, and an exam playbook.
