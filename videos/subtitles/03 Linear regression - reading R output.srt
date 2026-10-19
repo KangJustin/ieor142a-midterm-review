@@ -1,0 +1,395 @@
+1
+00:00:00,600 --> 00:00:05,750
+Linear regression is worth more points than any other topic on these practice
+
+2
+00:00:05,750 --> 00:00:07,355
+midterms: 62 out of 300.
+
+3
+00:00:07,355 --> 00:00:12,572
+The good news is that almost every question is a reading exercise on R output.
+
+4
+00:00:12,572 --> 00:00:16,585
+Here's how to read it, and the moves the exam keeps testing.
+
+5
+00:00:18,200 --> 00:00:23,356
+Here's the output from practice midterm two: a regression predicting a CPU's
+
+6
+00:00:23,356 --> 00:00:26,884
+published performance, PRP, from six hardware specs.
+
+7
+00:00:26,884 --> 00:00:30,072
+Three parts of it answer nearly every question.
+
+8
+00:00:30,853 --> 00:00:35,774
+The Estimate column is the coefficient: how much the prediction changes when that
+
+9
+00:00:35,774 --> 00:00:38,933
+feature rises by one unit, holding the others fixed.
+
+10
+00:00:38,933 --> 00:00:41,363
+That's what you use to make predictions.
+
+11
+00:00:42,120 --> 00:00:48,396
+The last column is the p-value for the null hypothesis that the coefficient is zero.
+
+12
+00:00:48,396 --> 00:00:50,563
+Below 0.05 means significant.
+
+13
+00:00:50,563 --> 00:00:54,224
+The stars are just a shortcut for the same thing.
+
+14
+00:00:54,987 --> 00:00:59,095
+And R squared at the bottom is the fit on the training data only.
+
+15
+00:00:59,095 --> 00:01:02,762
+Adjusted R squared adds a penalty for each extra variable,
+
+16
+00:01:02,762 --> 00:01:05,733
+so use it to compare models of different sizes.
+
+17
+00:01:07,333 --> 00:01:09,895
+Predictions are plug and chug.
+
+18
+00:01:09,895 --> 00:01:16,984
+On practice midterm two, a new CPU has a cycle time of 75, minimum memory of 2,500,
+
+19
+00:01:16,984 --> 00:01:22,792
+maximum memory of 10,000, cache of 30, and between 4 and 8 channels.
+
+20
+00:01:23,553 --> 00:01:28,021
+Start with the intercept, then add each coefficient times its value.
+
+21
+00:01:28,021 --> 00:01:33,146
+Write the whole expression before you compute: the rubric gives points for the
+
+22
+00:01:33,146 --> 00:01:37,746
+right coefficients and the right values, even if the arithmetic slips.
+
+23
+00:01:37,746 --> 00:01:39,454
+The answer is about 81.67.
+
+24
+00:01:40,220 --> 00:01:46,410
+Same move on midterm three's golf model gives about 2.64 million dollars.
+
+25
+00:01:46,410 --> 00:01:50,056
+One trap: driving accuracy is a percentage,
+
+26
+00:01:50,056 --> 00:01:56,160
+and the data preview shows values like 57.7, so you plug in 60, not 0.6.
+
+27
+00:01:57,767 --> 00:02:01,670
+Significance questions want a verdict plus evidence.
+
+28
+00:02:01,670 --> 00:02:03,021
+Use this template.
+
+29
+00:02:03,021 --> 00:02:08,125
+Yes or no: the p-value is this number, which is below or above 0.05,
+
+30
+00:02:08,125 --> 00:02:13,830
+so we can or cannot reject the null hypothesis that the coefficient is zero.
+
+31
+00:02:14,587 --> 00:02:21,292
+Average score on the golf model has a p-value of 2.46 times 10 to the minus 15:
+
+32
+00:02:21,292 --> 00:02:22,311
+significant.
+
+33
+00:02:22,311 --> 00:02:27,573
+Average putts has 0.617, and CHMAX on the CPU model has 0.179,
+
+34
+00:02:27,573 --> 00:02:29,780
+so neither is significant.
+
+35
+00:02:29,780 --> 00:02:31,223
+Quote the number.
+
+36
+00:02:31,223 --> 00:02:33,600
+That's where the points are.
+
+37
+00:02:35,200 --> 00:02:37,620
+Next, R squared versus OSR squared.
+
+38
+00:02:37,620 --> 00:02:40,662
+R squared measures fit on the training data.
+
+39
+00:02:40,662 --> 00:02:43,428
+OSR squared measures it on the test set,
+
+40
+00:02:43,428 --> 00:02:46,954
+compared against just predicting the training mean.
+
+41
+00:02:47,720 --> 00:02:51,164
+Adding a variable can never lower training R squared,
+
+42
+00:02:51,164 --> 00:02:53,504
+and removing one can never raise it.
+
+43
+00:02:53,504 --> 00:02:56,234
+But removal can leave R squared unchanged,
+
+44
+00:02:56,234 --> 00:03:01,628
+so the claim on practice midterm three that removing a variable always decreases it
+
+45
+00:03:01,628 --> 00:03:02,212
+is false.
+
+46
+00:03:02,987 --> 00:03:04,912
+Out of sample, anything goes.
+
+47
+00:03:04,912 --> 00:03:09,426
+Test OSR squared can rise or fall when you add or remove a variable,
+
+48
+00:03:09,426 --> 00:03:13,808
+so a higher training R squared guarantees nothing on the test set.
+
+49
+00:03:13,808 --> 00:03:19,052
+OSR squared can even be negative, which means the model predicts worse than the
+
+50
+00:03:19,052 --> 00:03:19,982
+training mean.
+
+51
+00:03:20,753 --> 00:03:25,558
+One more true or false: with two points at different x values and no noise,
+
+52
+00:03:25,558 --> 00:03:30,555
+least squares fits them exactly, so the estimates equal the true coefficients.
+
+53
+00:03:30,555 --> 00:03:30,875
+True.
+
+54
+00:03:32,467 --> 00:03:37,513
+Multicollinearity means one feature is nearly a combination of the others.
+
+55
+00:03:37,513 --> 00:03:41,945
+The VIF measures it: regress feature j on all the other features,
+
+56
+00:03:41,945 --> 00:03:45,696
+take that R squared, and compute one over one minus it.
+
+57
+00:03:45,696 --> 00:03:46,787
+Above 5 is high.
+
+58
+00:03:46,787 --> 00:03:51,219
+It inflates standard errors and makes coefficient signs unstable.
+
+59
+00:03:51,987 --> 00:03:56,035
+On practice midterm two, the largest VIF is 3.14,
+
+60
+00:03:56,035 --> 00:03:59,587
+so the answer is no high multicollinearity,
+
+61
+00:03:59,587 --> 00:04:04,792
+even though MMIN and MMAX have a pairwise correlation near 0.8.
+
+62
+00:04:04,792 --> 00:04:07,848
+The VIF is the test the rubric wants.
+
+63
+00:04:08,620 --> 00:04:14,797
+And the true or false from midterm one: can variables have large VIFs but only
+
+64
+00:04:14,797 --> 00:04:17,093
+modest pairwise correlations?
+
+65
+00:04:17,093 --> 00:04:17,410
+Yes.
+
+66
+00:04:17,410 --> 00:04:21,607
+If X nine is roughly the sum of eight other features,
+
+67
+00:04:21,607 --> 00:04:27,704
+each pairwise correlation is only about 0.35, but X nine's VIF is around 800.
+
+68
+00:04:29,300 --> 00:04:34,034
+A favorite short answer: can adding this new variable improve the model?
+
+69
+00:04:34,034 --> 00:04:37,651
+If it's a linear combination of existing variables, no.
+
+70
+00:04:37,651 --> 00:04:41,531
+CHAVG, the average of CHMIN and CHMAX, and putts per round,
+
+71
+00:04:41,531 --> 00:04:46,725
+which is 18 times putts per hole, add nothing the model couldn't already build.
+
+72
+00:04:46,725 --> 00:04:51,394
+R would even report an NA coefficient, because of perfect collinearity.
+
+73
+00:04:52,153 --> 00:04:55,398
+If it's a nonlinear transformation, yes, it can help.
+
+74
+00:04:55,398 --> 00:05:00,113
+Cache squared, a log, or a product of two features gives the model a shape it
+
+75
+00:05:00,113 --> 00:05:01,399
+couldn't make before.
+
+76
+00:05:03,000 --> 00:05:07,744
+Midterm three also shows two scatter plots: winnings against average score,
+
+77
+00:05:07,744 --> 00:05:10,654
+and the log of winnings against average score.
+
+78
+00:05:10,654 --> 00:05:13,943
+Raw winnings curve upward and fan out at low scores.
+
+79
+00:05:13,943 --> 00:05:17,233
+The log version is a straight band with even spread.
+
+80
+00:05:17,987 --> 00:05:22,017
+So choose log of winnings: linear regression fits straight lines,
+
+81
+00:05:22,017 --> 00:05:24,621
+and the log makes the relationship linear.
+
+82
+00:05:24,621 --> 00:05:29,644
+Just remember to predict on the log scale, then exponentiate to get dollars back.
+
+83
+00:05:31,233 --> 00:05:32,699
+Last, a reading trap.
+
+84
+00:05:32,699 --> 00:05:37,443
+A coefficient compares players with every other variable held fixed,
+
+85
+00:05:37,443 --> 00:05:40,792
+so its sign can differ from the raw correlation.
+
+86
+00:05:40,792 --> 00:05:46,374
+In the golf data, average putts correlates negatively with winnings, minus 0.28,
+
+87
+00:05:46,374 --> 00:05:50,491
+but its coefficient is positive, 2.19, and not significant.
+
+88
+00:05:50,491 --> 00:05:54,049
+Holding average score fixed changes the comparison.
+
+89
+00:05:55,633 --> 00:05:56,259
+To recap.
+
+90
+00:05:56,259 --> 00:06:01,678
+A prediction is the intercept plus each coefficient times its value: write the
+
+91
+00:06:01,678 --> 00:06:04,040
+expression first, and check units.
+
+92
+00:06:04,040 --> 00:06:08,209
+A coefficient is significant when its p-value is below 0.05,
+
+93
+00:06:08,209 --> 00:06:10,571
+and you should quote that p-value.
+
+94
+00:06:10,571 --> 00:06:14,323
+Training R squared can't fall when you add a variable,
+
+95
+00:06:14,323 --> 00:06:16,894
+but test OSR squared can do anything.
+
+96
+00:06:16,894 --> 00:06:21,062
+Judge multicollinearity with the VIF, where above 5 is high.
+
+97
+00:06:21,062 --> 00:06:26,134
+Linear combinations of features never help, but nonlinear transforms can.
+
+98
+00:06:26,134 --> 00:06:30,094
+And if the relationship curves and fans out, try the log.
+
+99
+00:06:30,094 --> 00:06:32,595
+Next: logistic regression and L D A.
