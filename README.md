@@ -1,6 +1,6 @@
 # IEOR 142A Midterm Review
 
-Narrated video lessons and a written study guide for the IEOR 142A (Intro to Machine Learning and Data Analytics) midterm. Everything is built from the Spring 2021 practice midterms 1 to 3.
+Eight narrated video lessons and a written study guide for the IEOR 142A (Intro to Machine Learning and Data Analytics) midterm. Everything is built from the Spring 2021 practice midterms 1 to 3.
 
 ## Videos
 
@@ -13,6 +13,7 @@ Narrated video lessons and a written study guide for the IEOR 142A (Intro to Mac
 | 5 | [CART](videos/05%20CART%20decision%20trees.mp4) | 7:11 | Greedy splits, impurity, reading trees, step functions, cp bounds, choosing cp |
 | 6 | [Cross-validation and the bootstrap](videos/06%20Cross-validation%20and%20the%20bootstrap.mp4) | 4:18 | k-fold, LOOCV cost, test sets, bootstrap CIs, bias across B |
 | 7 | [Bagging, random forests and boosting](videos/07%20Bagging,%20random%20forests%20and%20boosting.mp4) | 3:41 | The three methods, overfitting, the buggy-bagging questions |
+| 8 | [K-means, time series, text, playbook](videos/08%20K-means,%20time%20series,%20text%20and%20the%20exam%20playbook.mp4) | 3:53 | K-means, trend/season/AR(1), bag of words, Zipf, features, exam playbook |
 
 Each MP4 has chapters and an embedded subtitle track. The same subtitles are in [`videos/subtitles`](videos/subtitles) as `.srt` files.
 

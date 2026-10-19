@@ -1,0 +1,255 @@
+1
+00:00:00,600 --> 00:00:05,411
+This last video covers four small topics that each show up as one or two questions,
+
+2
+00:00:05,411 --> 00:00:07,497
+then a playbook for the exam itself.
+
+3
+00:00:09,100 --> 00:00:11,671
+K-means groups points into K clusters.
+
+4
+00:00:11,671 --> 00:00:13,160
+Pick K random centers.
+
+5
+00:00:13,160 --> 00:00:15,867
+Assign each point to its nearest center.
+
+6
+00:00:15,867 --> 00:00:18,776
+Move each center to the mean of its points.
+
+7
+00:00:18,776 --> 00:00:20,738
+Repeat until nothing changes.
+
+8
+00:00:21,520 --> 00:00:22,422
+Two exam facts.
+
+9
+00:00:22,422 --> 00:00:24,347
+You choose K, not the algorithm.
+
+10
+00:00:24,347 --> 00:00:27,654
+To compare K from 5 to 10, run it once per K: six runs.
+
+11
+00:00:27,654 --> 00:00:30,481
+Then compare the within-cluster sum of squares,
+
+12
+00:00:30,481 --> 00:00:32,826
+and how interpretable the clusters are.
+
+13
+00:00:32,826 --> 00:00:37,758
+And because the starting centers are random, two runs can give different clusters.
+
+14
+00:00:37,758 --> 00:00:39,923
+That's true on practice midterm two.
+
+15
+00:00:39,923 --> 00:00:44,734
+In practice, run several starts and keep the best, and scale the features first,
+
+16
+00:00:44,734 --> 00:00:46,659
+since K-means runs on distances.
+
+17
+00:00:48,267 --> 00:00:51,472
+For time series, match the plot to the model terms.
+
+18
+00:00:51,472 --> 00:00:54,741
+A steady drift calls for a trend term, beta times t.
+
+19
+00:00:54,741 --> 00:00:59,518
+A pattern that repeats each year or week calls for month or weekday dummies.
+
+20
+00:00:59,518 --> 00:01:04,484
+And if each day looks like the day before, add the previous value as a feature.
+
+21
+00:01:05,253 --> 00:01:10,027
+Practice midterm one's bike rentals climb over two years, peak every summer,
+
+22
+00:01:10,027 --> 00:01:13,796
+and track the previous day, so the answer uses all three: D.
+
+23
+00:01:14,553 --> 00:01:20,093
+The autoregressive model, AR(1), is X t equals beta zero plus beta one times X t
+
+24
+00:01:20,093 --> 00:01:21,617
+minus one, plus noise.
+
+25
+00:01:21,617 --> 00:01:25,495
+Practice midterm two's version had a time trend instead,
+
+26
+00:01:25,495 --> 00:01:30,688
+and the previous value with no coefficient, so it's not an AR model: false.
+
+27
+00:01:30,688 --> 00:01:35,189
+And always split training and test data by date, never at random.
+
+28
+00:01:36,800 --> 00:01:41,101
+Bag of words turns a document into word counts and ignores the order.
+
+29
+00:01:41,101 --> 00:01:45,527
+So writing a sentence twice doubles its counts, and the vectors differ.
+
+30
+00:01:45,527 --> 00:01:47,958
+That's false on practice midterm three.
+
+31
+00:01:48,720 --> 00:01:54,116
+Zipf's law says the r-th most common word appears about one over r as often as the
+
+32
+00:01:54,116 --> 00:01:55,169
+most common one.
+
+33
+00:01:55,169 --> 00:02:00,631
+That's a heavy tail: rare words, added together, make up a large share of the text.
+
+34
+00:02:00,631 --> 00:02:05,238
+So practice midterm two's claim of a light, exponential tail is false.
+
+35
+00:02:06,833 --> 00:02:11,941
+Practice midterm one's last question asks for two features built from the booking
+
+36
+00:02:11,941 --> 00:02:15,345
+and trip timestamps, with at least one that uses both.
+
+37
+00:02:15,345 --> 00:02:20,516
+From one timestamp: day of week, hour, month, or a weekend flag, coded as dummies.
+
+38
+00:02:20,516 --> 00:02:24,740
+From both: the lead time, trip time minus booking time, in minutes.
+
+39
+00:02:25,520 --> 00:02:28,629
+And only build features you'd know at prediction time.
+
+40
+00:02:28,629 --> 00:02:31,681
+Anything recorded after the outcome leaks the answer.
+
+41
+00:02:33,267 --> 00:02:34,945
+Finally, the exam playbook.
+
+42
+00:02:34,945 --> 00:02:37,120
+Most questions fall into six types.
+
+43
+00:02:37,120 --> 00:02:41,718
+Statements with always, never, or guaranteed: hunt for one counterexample,
+
+44
+00:02:41,718 --> 00:02:43,893
+which is enough to make them false.
+
+45
+00:02:43,893 --> 00:02:48,679
+For the most definitive statement, find the tightest range that's guaranteed.
+
+46
+00:02:48,679 --> 00:02:53,775
+And for 'can a new feature help': a linear combination of existing features can't,
+
+47
+00:02:53,775 --> 00:02:55,639
+but a nonlinear transform can.
+
+48
+00:02:56,420 --> 00:03:01,098
+For 'is there enough information': trace every branch you can't rule out,
+
+49
+00:03:01,098 --> 00:03:04,366
+and remember that a prediction isn't a probability.
+
+50
+00:03:04,366 --> 00:03:09,108
+For computations from output, write the expression first, then the number.
+
+51
+00:03:09,108 --> 00:03:13,594
+And for justification questions, quote the evidence: a p-value, a VIF,
+
+52
+00:03:13,594 --> 00:03:15,196
+a cross-validation score.
+
+53
+00:03:15,953 --> 00:03:19,246
+One tiebreaker for true or false when you're stuck.
+
+54
+00:03:19,246 --> 00:03:24,541
+In these three exams, always, impossible and guaranteed claims were usually false,
+
+55
+00:03:24,541 --> 00:03:28,285
+and 'it is possible that' was true both times it appeared.
+
+56
+00:03:28,285 --> 00:03:30,287
+The exceptions were math facts.
+
+57
+00:03:30,287 --> 00:03:32,159
+Use it only as a last resort.
+
+58
+00:03:33,767 --> 00:03:35,191
+That's the whole series.
+
+59
+00:03:35,191 --> 00:03:39,877
+Next, work the practice problems in the study guide under a timer; they're your
+
+60
+00:03:39,877 --> 00:03:40,530
+fresh test.
+
+61
+00:03:40,530 --> 00:03:43,378
+Drill the multiple choice answers as flashcards,
+
+62
+00:03:43,378 --> 00:03:45,514
+and build your note sheet as you go.
+
+63
+00:03:45,514 --> 00:03:48,895
+Then take one practice midterm with just your note sheet.
+
+64
+00:03:48,895 --> 00:03:50,378
+Good luck on the midterm.
