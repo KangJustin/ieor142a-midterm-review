@@ -1,0 +1,419 @@
+1
+00:00:00,600 --> 00:00:04,661
+Every practice midterm turns dollars into a probability threshold.
+
+2
+00:00:04,661 --> 00:00:09,031
+In this video, you'll learn the one formula that does it, why it works,
+
+3
+00:00:09,031 --> 00:00:10,938
+and every way the exam uses it.
+
+4
+00:00:12,533 --> 00:00:15,266
+Here's the setup from practice midterm one.
+
+5
+00:00:15,266 --> 00:00:20,477
+YourCabs gets a booking, and the assigned driver might cancel, with probability p.
+
+6
+00:00:20,477 --> 00:00:25,370
+YourCabs can keep the driver, or reassign the booking to a more reliable one.
+
+7
+00:00:26,153 --> 00:00:31,733
+If they keep the driver and the driver cancels, they lose 100 dollars.
+
+8
+00:00:31,733 --> 00:00:34,682
+If the driver shows up, they earn 25.
+
+9
+00:00:34,682 --> 00:00:37,472
+So keeping is worth 25 minus 125 p.
+
+10
+00:00:38,253 --> 00:00:44,628
+If they reassign, the new driver almost never cancels: one time in a thousand,
+
+11
+00:00:44,628 --> 00:00:46,263
+costing 110 dollars.
+
+12
+00:00:46,263 --> 00:00:48,143
+Otherwise they earn 15.
+
+13
+00:00:48,143 --> 00:00:52,801
+That branch is worth 14.875 dollars, no matter what p is.
+
+14
+00:00:54,400 --> 00:00:58,460
+Now plot each action's expected payoff against p.
+
+15
+00:00:58,460 --> 00:01:04,178
+Keeping starts at 25 dollars and falls as cancellations get likelier.
+
+16
+00:01:04,178 --> 00:01:06,664
+Reassigning is flat at 14.875.
+
+17
+00:01:07,420 --> 00:01:14,241
+Set them equal: 25 minus 125 p equals 14.875 gives p* equals 0.081.
+
+18
+00:01:14,241 --> 00:01:18,415
+Below that, keeping the driver pays more.
+
+19
+00:01:18,415 --> 00:01:20,349
+Above it, reassign.
+
+20
+00:01:20,349 --> 00:01:23,505
+That's the whole decision rule.
+
+21
+00:01:25,100 --> 00:01:29,354
+There's a faster way that works on every exam: think in regrets.
+
+22
+00:01:29,354 --> 00:01:31,415
+First, name the positive class.
+
+23
+00:01:31,415 --> 00:01:33,143
+Here, it's a cancellation.
+
+24
+00:01:33,143 --> 00:01:37,796
+Predicting positive means taking the action you'd want for a positive,
+
+25
+00:01:37,796 --> 00:01:39,192
+which is reassigning.
+
+26
+00:01:39,953 --> 00:01:47,364
+If the driver really would cancel, reassigning beats keeping by 14.875 minus minus
+
+27
+00:01:47,364 --> 00:01:49,352
+100, which is 114.875.
+
+28
+00:01:49,352 --> 00:01:55,317
+Keeping in that world is a false negative, so that regret is L_FN.
+
+29
+00:01:56,087 --> 00:02:02,500
+If the driver would show up, keeping beats reassigning by 25 minus 14.875,
+
+30
+00:02:02,500 --> 00:02:03,887
+which is 10.125.
+
+31
+00:02:03,887 --> 00:02:09,260
+Reassigning in that world is a false positive, so that's L_FP.
+
+32
+00:02:10,020 --> 00:02:19,592
+Then the threshold is L_FP over L_FP plus L_FN: 10.125 over 125, which is 0.081.
+
+33
+00:02:19,592 --> 00:02:22,464
+Same answer, no algebra.
+
+34
+00:02:24,067 --> 00:02:25,189
+Why does it work?
+
+35
+00:02:25,189 --> 00:02:30,339
+If you predict positive, you're only wrong when the case is actually negative.
+
+36
+00:02:30,339 --> 00:02:33,574
+So your expected loss is one minus p, times L_FP.
+
+37
+00:02:34,353 --> 00:02:39,573
+If you predict negative, you're only wrong when the case is actually positive.
+
+38
+00:02:39,573 --> 00:02:41,915
+Your expected loss is p times L_FN.
+
+39
+00:02:42,687 --> 00:02:46,447
+Predict positive when that first loss is smaller.
+
+40
+00:02:46,447 --> 00:02:52,050
+Solve for p, and you get exactly p greater than L_FP over L_FP plus L_FN.
+
+41
+00:02:52,820 --> 00:02:57,732
+Notice that multiplying both losses by the same number cancels out.
+
+42
+00:02:57,732 --> 00:02:59,419
+Only the ratio matters.
+
+43
+00:02:59,419 --> 00:03:05,431
+That's why practice midterm one can give CART losses of 11.35 and 1 instead of the
+
+44
+00:03:05,431 --> 00:03:06,530
+dollar amounts.
+
+45
+00:03:08,133 --> 00:03:12,778
+Here's the formula across all three practice midterms.
+
+46
+00:03:12,778 --> 00:03:19,659
+Question seven on midterm one gives L_FN of 2 and L_FP of 1, so p* is one third.
+
+47
+00:03:19,659 --> 00:03:22,669
+YourCabs, as we just saw, is 0.081.
+
+48
+00:03:23,453 --> 00:03:27,447
+For Lending Club, the positive class is a default.
+
+49
+00:03:27,447 --> 00:03:31,361
+Funding a loan that defaults costs 4,000 dollars,
+
+50
+00:03:31,361 --> 00:03:34,636
+and rejecting a good loan gives up 1,000.
+
+51
+00:03:34,636 --> 00:03:37,831
+So p* is 1,000 over 5,000, which is 0.2.
+
+52
+00:03:38,587 --> 00:03:42,248
+And for the golf bet on midterm three, p* is two thirds.
+
+53
+00:03:42,248 --> 00:03:43,621
+That one has a twist.
+
+54
+00:03:45,233 --> 00:03:51,326
+On practice midterm three, you pay 100 dollars for a bet that returns 150 if a
+
+55
+00:03:51,326 --> 00:03:54,607
+golfer wins more than 2.5 million dollars.
+
+56
+00:03:54,607 --> 00:03:56,716
+So you gain 50 or lose 100.
+
+57
+00:03:56,716 --> 00:04:02,575
+Betting pays off on average when 50 p is bigger than 100 times one minus p,
+
+58
+00:04:02,575 --> 00:04:04,997
+which means p above two thirds.
+
+59
+00:04:05,753 --> 00:04:10,499
+The regression from that exam predicts about 2.64 million for this golfer,
+
+60
+00:04:10,499 --> 00:04:11,397
+above the bar.
+
+61
+00:04:11,397 --> 00:04:14,540
+But that's a predicted amount, not a probability.
+
+62
+00:04:14,540 --> 00:04:18,517
+You can't compare it with two thirds, so you can't decide yet.
+
+63
+00:04:19,287 --> 00:04:24,775
+To decide, build a classifier, like a logistic regression on a new column: did
+
+64
+00:04:24,775 --> 00:04:26,746
+winnings exceed 2.5 million?
+
+65
+00:04:26,746 --> 00:04:31,390
+Estimate p for this golfer, and bet only if p is above two thirds.
+
+66
+00:04:32,153 --> 00:04:38,476
+For intuition: actual winnings scatter around the prediction by about 0.89 million.
+
+67
+00:04:38,476 --> 00:04:44,265
+So the chance of clearing 2.5 million is only around 0.56, below two thirds.
+
+68
+00:04:44,265 --> 00:04:49,445
+A prediction above the bar is not a probability above the threshold.
+
+69
+00:04:51,033 --> 00:04:57,804
+To score a model in dollars, multiply each cell's count by its payoff and add.
+
+70
+00:04:57,804 --> 00:05:03,186
+The model keeps 909 bookings that go fine, at 25 dollars each.
+
+71
+00:05:03,186 --> 00:05:06,745
+It keeps 26 that cancel, losing 100 each.
+
+72
+00:05:06,745 --> 00:05:10,130
+And it reassigns 78, worth 14.875 each.
+
+73
+00:05:10,130 --> 00:05:13,689
+The total is 21,285 dollars and 25 cents.
+
+74
+00:05:14,453 --> 00:05:19,108
+The baseline that never reassigns earns 978 times 25,
+
+75
+00:05:19,108 --> 00:05:22,182
+minus 35 times 100: 20,950 dollars.
+
+76
+00:05:22,182 --> 00:05:28,418
+So the model earns 335 dollars more, even though its accuracy is lower.
+
+77
+00:05:28,418 --> 00:05:34,302
+Accuracy is the wrong yardstick when errors cost different amounts.
+
+78
+00:05:35,900 --> 00:05:40,977
+Practice midterm two asks you to justify the losses for Lending Club.
+
+79
+00:05:40,977 --> 00:05:46,055
+A funded good loan earns 1,000 dollars, a funded default loses 4,000,
+
+80
+00:05:46,055 --> 00:05:48,557
+and a rejected loan earns nothing.
+
+81
+00:05:48,557 --> 00:05:54,297
+Funded good loans are true negatives, and funded defaults are false negatives.
+
+82
+00:05:54,297 --> 00:05:57,019
+So profit is 1,000 TN minus 4,000 FN.
+
+83
+00:05:57,787 --> 00:06:03,411
+Every actual negative is either a true negative or a false positive,
+
+84
+00:06:03,411 --> 00:06:06,140
+so TN equals N negative minus FP.
+
+85
+00:06:06,140 --> 00:06:10,606
+Substitute, and profit becomes 1,000 times N negative,
+
+86
+00:06:10,606 --> 00:06:14,080
+minus the quantity 4,000 FN plus 1,000 FP.
+
+87
+00:06:14,853 --> 00:06:17,855
+N negative is fixed by the data.
+
+88
+00:06:17,855 --> 00:06:25,171
+So maximizing profit is exactly the same as minimizing 4,000 FN plus 1,000 FP.
+
+89
+00:06:25,171 --> 00:06:29,204
+That's why L_FN is 4,000 and L_FP is 1,000.
+
+90
+00:06:30,800 --> 00:06:32,014
+Last, ensembles.
+
+91
+00:06:32,014 --> 00:06:36,868
+If each tree outputs a probability, average the B probabilities,
+
+92
+00:06:36,868 --> 00:06:41,040
+then compare the average with p*, 0.2 for Lending Club.
+
+93
+00:06:41,820 --> 00:06:46,536
+But if each tree was trained with the losses 4,000 and 1,000,
+
+94
+00:06:46,536 --> 00:06:50,248
+its zero or one vote already includes the costs.
+
+95
+00:06:50,248 --> 00:06:52,799
+So take a simple majority at 0.5.
+
+96
+00:06:52,799 --> 00:06:56,201
+Using 0.2 there would count the costs twice.
+
+97
+00:06:57,800 --> 00:06:58,379
+To recap.
+
+98
+00:06:58,379 --> 00:07:03,329
+A loss is a regret: how much better the right action pays than the wrong one,
+
+99
+00:07:03,329 --> 00:07:05,579
+in the world that actually happens.
+
+100
+00:07:05,579 --> 00:07:10,208
+The threshold is L_FP over L_FP plus L_FN, and only their ratio matters.
+
+101
+00:07:10,208 --> 00:07:12,780
+A predicted amount is not a probability.
+
+102
+00:07:12,780 --> 00:07:15,159
+Score models by profit, not accuracy.
+
+103
+00:07:15,159 --> 00:07:19,209
+And when you combine trees, apply p* to averaged probabilities,
+
+104
+00:07:19,209 --> 00:07:22,360
+but use a simple majority for cost-trained votes.
+
+105
+00:07:22,360 --> 00:07:24,096
+Next up: linear regression.

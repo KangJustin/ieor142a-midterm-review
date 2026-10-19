@@ -7,6 +7,7 @@ Narrated video lessons and a written study guide for the IEOR 142A (Intro to Mac
 | # | Lesson | Length | Covers |
 | --- | --- | --- | --- |
 | 1 | [Classification metrics and ROC curves](videos/01%20Classification%20metrics%20and%20ROC%20curves.mp4) | 8:08 | Confusion matrix, accuracy/TPR/FPR, baselines, ROC and AUC, PM1 Q10–Q11 |
+| 2 | [Decision analysis](videos/02%20Decision%20analysis%20-%20payoffs%20to%20a%20threshold.mp4) | 7:27 | Decision trees, regret losses, p* = L_FP / (L_FP + L_FN), profit, ensemble thresholds |
 
 Each MP4 has chapters and an embedded subtitle track. The same subtitles are in [`videos/subtitles`](videos/subtitles) as `.srt` files.
 
