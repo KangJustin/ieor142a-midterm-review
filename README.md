@@ -10,6 +10,7 @@ Narrated video lessons and a written study guide for the IEOR 142A (Intro to Mac
 | 2 | [Decision analysis](videos/02%20Decision%20analysis%20-%20payoffs%20to%20a%20threshold.mp4) | 7:27 | Decision trees, regret losses, p* = L_FP / (L_FP + L_FN), profit, ensemble thresholds |
 | 3 | [Linear regression](videos/03%20Linear%20regression%20-%20reading%20R%20output.mp4) | 6:35 | Reading `summary(lm)`, predictions, p-values, R² vs OSR², VIF, new variables, log(Y) |
 | 4 | [Logistic regression and LDA](videos/04%20Logistic%20regression%20and%20LDA.mp4) | 5:45 | The logistic model, predictions, odds, dummy coding, LDA and Bayes' rule |
+| 5 | [CART](videos/05%20CART%20decision%20trees.mp4) | 7:11 | Greedy splits, impurity, reading trees, step functions, cp bounds, choosing cp |
 
 Each MP4 has chapters and an embedded subtitle track. The same subtitles are in [`videos/subtitles`](videos/subtitles) as `.srt` files.
 

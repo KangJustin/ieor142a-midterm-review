@@ -1,0 +1,431 @@
+1
+00:00:00,600 --> 00:00:03,984
+CART is the second-biggest topic on these midterms.
+
+2
+00:00:03,984 --> 00:00:08,231
+Every question comes down to a few ideas: how a split is chosen,
+
+3
+00:00:08,231 --> 00:00:12,611
+how to read a tree, what cp does, and how costs change the leaves.
+
+4
+00:00:14,200 --> 00:00:15,952
+CART grows a tree greedily.
+
+5
+00:00:15,952 --> 00:00:19,716
+At each node, it tries every variable and every cut point,
+
+6
+00:00:19,716 --> 00:00:24,777
+and keeps the single cut that lowers impurity the most: Gini or error rate for
+
+7
+00:00:24,777 --> 00:00:28,605
+classification, the residual sum of squares for regression.
+
+8
+00:00:28,605 --> 00:00:30,552
+Then it repeats on each child.
+
+9
+00:00:30,552 --> 00:00:35,029
+Afterward, it prunes any split that improved the fit by less than cp.
+
+10
+00:00:35,787 --> 00:00:41,197
+Practice midterm three asks why AverageScore was the only variable used in the golf
+
+11
+00:00:41,197 --> 00:00:41,523
+tree.
+
+12
+00:00:41,523 --> 00:00:44,326
+The precise answer: at each of those nodes,
+
+13
+00:00:44,326 --> 00:00:49,280
+its best cut lowered the RSS more than any cut on the other three variables.
+
+14
+00:00:49,280 --> 00:00:52,605
+The intuition: it's by far the strongest predictor,
+
+15
+00:00:52,605 --> 00:00:55,669
+with a correlation of minus 0.76 with winnings.
+
+16
+00:00:55,669 --> 00:00:59,710
+The rubric takes points off if you skip how CART picks splits.
+
+17
+00:01:01,300 --> 00:01:06,227
+To score a cut, CART uses an impurity function of the class mix in a node.
+
+18
+00:01:06,227 --> 00:01:11,420
+A good one is zero for a pure node, highest at a fifty-fifty mix, and concave,
+
+19
+00:01:11,420 --> 00:01:13,550
+shaped like an upside-down bowl.
+
+20
+00:01:13,550 --> 00:01:15,747
+Gini and error rate both qualify.
+
+21
+00:01:16,520 --> 00:01:17,293
+Why concave?
+
+22
+00:01:17,293 --> 00:01:21,223
+A parent's mix is a weighted average of its children's mixes,
+
+23
+00:01:21,223 --> 00:01:26,120
+and for a concave function, the children's average impurity can't exceed the
+
+24
+00:01:26,120 --> 00:01:26,699
+parent's.
+
+25
+00:01:26,699 --> 00:01:29,405
+So a split never increases total impurity.
+
+26
+00:01:29,405 --> 00:01:33,980
+On practice midterm two, question thirteen, the tent and the dome work,
+
+27
+00:01:33,980 --> 00:01:36,170
+but the dip and the U-shape don't.
+
+28
+00:01:36,170 --> 00:01:37,910
+The answer is only B and C.
+
+29
+00:01:38,687 --> 00:01:42,330
+But never increasing isn't the same as always decreasing.
+
+30
+00:01:42,330 --> 00:01:44,695
+A split can leave impurity unchanged,
+
+31
+00:01:44,695 --> 00:01:49,872
+for example under error rate when both children keep the parent's majority class.
+
+32
+00:01:49,872 --> 00:01:54,538
+So the claim that impurity strictly decreases after every split is false.
+
+33
+00:01:56,133 --> 00:02:00,178
+Reading a tree: at each node, go left when the condition is true.
+
+34
+00:02:00,178 --> 00:02:05,219
+Here's the Lending Club tree from practice midterm two, where 1 means a bad risk.
+
+35
+00:02:05,987 --> 00:02:10,502
+Part b: FICO is 650, and the number of inquiries is unknown.
+
+36
+00:02:10,502 --> 00:02:12,760
+650 is below 740, so go right.
+
+37
+00:02:12,760 --> 00:02:17,577
+If inquiries are under 3, we check whether FICO is at least 665.
+
+38
+00:02:17,577 --> 00:02:19,233
+It isn't, so bad risk.
+
+39
+00:02:19,233 --> 00:02:22,394
+If inquiries are 3 or more, also bad risk.
+
+40
+00:02:22,394 --> 00:02:27,737
+Every branch you can't rule out ends in bad risk, so that's the answer.
+
+41
+00:02:28,520 --> 00:02:30,924
+Part c: 4 inquiries, FICO unknown.
+
+42
+00:02:30,924 --> 00:02:34,388
+If FICO is at least 740, the tree says good risk.
+
+43
+00:02:34,388 --> 00:02:38,417
+If not, 4 inquiries fails the under-3 check, so bad risk.
+
+44
+00:02:38,417 --> 00:02:43,012
+The branches disagree, so the answer is: you need the FICO score,
+
+45
+00:02:43,012 --> 00:02:45,345
+and here's what each value gives.
+
+46
+00:02:46,120 --> 00:02:50,635
+One more reading tip from midterm one: on a zero-one variable,
+
+47
+00:02:50,635 --> 00:02:53,621
+X less than 0.5 just means X equals zero.
+
+48
+00:02:53,621 --> 00:02:57,990
+That tree predicts a cancellation only for vehicle model 12,
+
+49
+00:02:57,990 --> 00:02:59,884
+booked on the mobile site.
+
+50
+00:03:01,500 --> 00:03:03,503
+Regression trees predict a number.
+
+51
+00:03:03,503 --> 00:03:06,684
+Each leaf predicts the average of its training points.
+
+52
+00:03:06,684 --> 00:03:09,570
+Here's the golf tree from practice midterm three,
+
+53
+00:03:09,570 --> 00:03:11,809
+where every split is on average score.
+
+54
+00:03:12,587 --> 00:03:17,877
+So the prediction, as a function of average score,
+
+55
+00:03:17,877 --> 00:03:24,754
+is a step function: flat inside each region, jumping at each cut.
+
+56
+00:03:24,754 --> 00:03:28,880
+Below 70.02, it predicts 5.145 million.
+
+57
+00:03:28,880 --> 00:03:34,170
+Then 2.897, then 1.506, and from 71.12 up, 0.8197.
+
+58
+00:03:34,953 --> 00:03:36,891
+The rubric checks the details.
+
+59
+00:03:36,891 --> 00:03:40,766
+Label both axes, and draw flat steps, not a continuous line.
+
+60
+00:03:40,766 --> 00:03:43,672
+Because the splits use greater than or equal,
+
+61
+00:03:43,672 --> 00:03:48,838
+each cut value belongs to the step on its right: a filled dot at the left end of
+
+62
+00:03:48,838 --> 00:03:51,679
+each step, and an open dot at its right end.
+
+63
+00:03:53,267 --> 00:03:55,549
+Now cp, the complexity parameter.
+
+64
+00:03:55,549 --> 00:04:01,222
+In the pruning phase, a split survives only if it improves the fit by at least cp.
+
+65
+00:04:01,222 --> 00:04:06,479
+For a regression tree, that means raising training R squared by at least cp.
+
+66
+00:04:06,479 --> 00:04:12,082
+A bigger cp gives a smaller tree, and a cp of zero keeps everything and overfits.
+
+67
+00:04:12,853 --> 00:04:18,800
+Practice midterm three: the tree has a training R squared of 0.704,
+
+68
+00:04:18,800 --> 00:04:20,753
+with cp equal to 0.01.
+
+69
+00:04:20,753 --> 00:04:23,327
+Add one more split to a leaf.
+
+70
+00:04:23,327 --> 00:04:28,830
+Splits never lower training R squared, so it's at least 0.704.
+
+71
+00:04:28,830 --> 00:04:35,399
+And if the new split had added more than 0.01, pruning would have kept it.
+
+72
+00:04:35,399 --> 00:04:41,257
+So the most definitive answer is the interval from 0.704 to 0.714.
+
+73
+00:04:42,020 --> 00:04:45,557
+Now remove the bottom right split instead.
+
+74
+00:04:45,557 --> 00:04:50,358
+That split was kept, so it must have added at least 0.01.
+
+75
+00:04:50,358 --> 00:04:54,149
+Removing it drops R squared to at most 0.694.
+
+76
+00:04:54,149 --> 00:04:57,770
+The answer is the interval from 0 to 0.694.
+
+77
+00:04:59,367 --> 00:05:04,313
+Practice midterm one tuned cp with ten-fold cross-validation,
+
+78
+00:05:04,313 --> 00:05:06,583
+using losses of 11.35 and 1.
+
+79
+00:05:06,583 --> 00:05:12,988
+The output reports both the average loss and the accuracy for each value of cp.
+
+80
+00:05:13,753 --> 00:05:18,226
+By average loss, the lowest value, 0.3617,
+
+81
+00:05:18,226 --> 00:05:22,805
+is tied from cp 0.001 all the way to 0.011.
+
+82
+00:05:22,805 --> 00:05:30,686
+When there's a tie, pick the largest cp, since it gives the simplest tree.
+
+83
+00:05:30,686 --> 00:05:32,283
+So cp is 0.011.
+
+84
+00:05:33,053 --> 00:05:36,847
+By accuracy, the best is 0.9606, at cp 0.040.
+
+85
+00:05:36,847 --> 00:05:42,075
+But with imbalanced classes and unequal costs, trust the loss.
+
+86
+00:05:42,075 --> 00:05:48,820
+Chasing accuracy drifts toward the baseline: a tree that almost never predicts a
+
+87
+00:05:48,820 --> 00:05:49,916
+cancellation.
+
+88
+00:05:51,500 --> 00:05:54,964
+Costs also change what a leaf predicts.
+
+89
+00:05:54,964 --> 00:06:02,248
+With losses L_FN and L_FP, a leaf predicts positive when its share of positives is
+
+90
+00:06:02,248 --> 00:06:08,289
+above L_FP over L_FP plus L_FN, the same p* as in decision analysis.
+
+91
+00:06:08,289 --> 00:06:12,464
+With losses of 11.35 and 1, that's about 0.081.
+
+92
+00:06:13,220 --> 00:06:18,296
+And a quick one from practice midterm three: six training points, five regions.
+
+93
+00:06:18,296 --> 00:06:21,830
+A region with one point always classifies it correctly.
+
+94
+00:06:21,830 --> 00:06:25,236
+Only the region with two points could hold a mistake,
+
+95
+00:06:25,236 --> 00:06:27,228
+and at worst it gets one wrong.
+
+96
+00:06:27,228 --> 00:06:31,212
+So training accuracy is between five sixths and one: answer C.
+
+97
+00:06:32,800 --> 00:06:33,385
+To recap.
+
+98
+00:06:33,385 --> 00:06:37,805
+CART picks the best cut at each node, over every variable and value,
+
+99
+00:06:37,805 --> 00:06:39,104
+then prunes with cp.
+
+100
+00:06:39,104 --> 00:06:44,369
+A good impurity function is zero when pure, peaks at fifty-fifty, and is concave,
+
+101
+00:06:44,369 --> 00:06:47,944
+so splits never raise it, though they may not lower it.
+
+102
+00:06:47,944 --> 00:06:51,908
+Go left when the condition is true, and with a missing value,
+
+103
+00:06:51,908 --> 00:06:54,443
+follow every branch you can't rule out.
+
+104
+00:06:54,443 --> 00:06:56,848
+A regression tree is a step function.
+
+105
+00:06:56,848 --> 00:07:00,553
+Adding a split keeps R squared within cp of where it was,
+
+106
+00:07:00,553 --> 00:07:03,802
+and removing a kept split drops it by at least cp.
+
+107
+00:07:03,802 --> 00:07:05,882
+Pick cp by cross-validated loss.
+
+108
+00:07:05,882 --> 00:07:08,547
+Next: cross-validation and the bootstrap.
