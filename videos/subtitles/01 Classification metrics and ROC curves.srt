@@ -1,0 +1,527 @@
+1
+00:00:00,600 --> 00:00:05,139
+Every classification question on this midterm comes down to four counts.
+
+2
+00:00:05,139 --> 00:00:08,858
+Get those four right, and accuracy, the true positive rate,
+
+3
+00:00:08,858 --> 00:00:12,955
+the false positive rate, and the ROC curve are all just division.
+
+4
+00:00:12,955 --> 00:00:17,998
+Let's build them up, then use them on real questions from the practice midterms.
+
+5
+00:00:19,600 --> 00:00:21,525
+Start with the confusion matrix.
+
+6
+00:00:21,525 --> 00:00:23,690
+The rows are what actually happened.
+
+7
+00:00:23,690 --> 00:00:26,156
+The columns are what the model predicted.
+
+8
+00:00:26,920 --> 00:00:29,452
+The top row holds the actual negatives.
+
+9
+00:00:29,452 --> 00:00:32,698
+A true negative is a negative the model got right.
+
+10
+00:00:32,698 --> 00:00:36,138
+A false positive is a negative it flagged by mistake.
+
+11
+00:00:36,920 --> 00:00:39,647
+The bottom row holds the actual positives.
+
+12
+00:00:39,647 --> 00:00:42,765
+A false negative is a positive the model missed.
+
+13
+00:00:42,765 --> 00:00:44,908
+A true positive is one it caught.
+
+14
+00:00:45,687 --> 00:00:48,015
+Here's a quick way to decode the names.
+
+15
+00:00:48,015 --> 00:00:50,641
+The second word is what the model predicted.
+
+16
+00:00:50,641 --> 00:00:53,864
+The first word says whether that prediction was right.
+
+17
+00:00:53,864 --> 00:00:57,446
+So a false negative is a negative prediction that was wrong,
+
+18
+00:00:57,446 --> 00:01:00,012
+which means the case was actually positive.
+
+19
+00:01:01,600 --> 00:01:03,582
+Accuracy uses the whole table.
+
+20
+00:01:03,582 --> 00:01:08,670
+Add up the diagonal, the cases the model got right, and divide by everything.
+
+21
+00:01:09,453 --> 00:01:14,574
+The true positive rate only looks at the bottom row, the actual positives.
+
+22
+00:01:14,574 --> 00:01:18,449
+Of all the positives, what fraction did the model catch?
+
+23
+00:01:18,449 --> 00:01:20,248
+That's TP over TP plus FN.
+
+24
+00:01:21,020 --> 00:01:26,029
+The false positive rate only looks at the top row, the actual negatives.
+
+25
+00:01:26,029 --> 00:01:30,412
+Of all the negatives, what fraction did the model wrongly flag?
+
+26
+00:01:30,412 --> 00:01:32,221
+That's FP over FP plus TN.
+
+27
+00:01:32,987 --> 00:01:35,124
+The complements come for free.
+
+28
+00:01:35,124 --> 00:01:37,973
+The true negative rate is one minus FPR,
+
+29
+00:01:37,973 --> 00:01:41,179
+and the false negative rate is one minus TPR.
+
+30
+00:01:42,767 --> 00:01:46,301
+Now real numbers, from practice midterm one.
+
+31
+00:01:46,301 --> 00:01:49,675
+The positive class is a driver cancelling.
+
+32
+00:01:49,675 --> 00:01:55,137
+On 1,013 test bookings, the logistic model gives 909 true negatives,
+
+33
+00:01:55,137 --> 00:02:00,037
+69 false positives, 26 false negatives, and 9 true positives.
+
+34
+00:02:00,820 --> 00:02:05,494
+Accuracy is 909 plus 9, over 1,013.
+
+35
+00:02:05,494 --> 00:02:08,031
+That's about 0.906.
+
+36
+00:02:08,787 --> 00:02:11,949
+TPR is 9 over 35, about 0.257.
+
+37
+00:02:11,949 --> 00:02:18,062
+The 35 is every actual cancellation, the whole bottom row.
+
+38
+00:02:18,820 --> 00:02:22,467
+FPR is 69 over 978, about 0.071.
+
+39
+00:02:22,467 --> 00:02:29,646
+The 978 is every booking that didn't cancel, the whole top row.
+
+40
+00:02:30,420 --> 00:02:36,166
+Now compare the baseline, which predicts the training set's majority class for
+
+41
+00:02:36,166 --> 00:02:36,829
+everyone.
+
+42
+00:02:36,829 --> 00:02:38,965
+Here, that's no cancellation.
+
+43
+00:02:38,965 --> 00:02:42,869
+Its accuracy is about 0.965, higher than the model's.
+
+44
+00:02:42,869 --> 00:02:44,342
+But its TPR is zero.
+
+45
+00:02:44,342 --> 00:02:47,215
+It never catches a single cancellation.
+
+46
+00:02:47,987 --> 00:02:48,796
+Here's why.
+
+47
+00:02:48,796 --> 00:02:53,578
+Accuracy is a weighted average of TPR and the true negative rate,
+
+48
+00:02:53,578 --> 00:02:55,270
+weighted by class size.
+
+49
+00:02:55,270 --> 00:02:57,918
+With 35 positives and 978 negatives,
+
+50
+00:02:57,918 --> 00:03:01,743
+about 97 percent of that weight is on the negatives.
+
+51
+00:03:01,743 --> 00:03:07,481
+Question twelve on practice midterm three states this identity, and it's true.
+
+52
+00:03:09,067 --> 00:03:12,123
+Three quick checks from the multiple choice.
+
+53
+00:03:12,123 --> 00:03:14,484
+Pause if you want to answer first.
+
+54
+00:03:14,484 --> 00:03:14,762
+One.
+
+55
+00:03:14,762 --> 00:03:19,624
+If accuracy on the test set is exactly one, with both classes present,
+
+56
+00:03:19,624 --> 00:03:20,735
+is TPR also one?
+
+57
+00:03:22,720 --> 00:03:23,040
+True.
+
+58
+00:03:23,040 --> 00:03:27,651
+Perfect accuracy means no false negatives, so every positive was caught.
+
+59
+00:03:28,420 --> 00:03:28,747
+Two.
+
+60
+00:03:28,747 --> 00:03:30,137
+Accuracy is 0.99.
+
+61
+00:03:30,137 --> 00:03:34,634
+What's the most definitive thing you can say about TPR?
+
+62
+00:03:36,620 --> 00:03:39,442
+Only that it's between zero and one.
+
+63
+00:03:39,442 --> 00:03:45,636
+If one case in a hundred is positive and the model misses it, accuracy is 0.99,
+
+64
+00:03:45,636 --> 00:03:46,890
+and TPR is zero.
+
+65
+00:03:47,653 --> 00:03:48,014
+Three.
+
+66
+00:03:48,014 --> 00:03:51,741
+True or false: changing the threshold doesn't change accuracy.
+
+67
+00:03:53,520 --> 00:03:54,018
+False.
+
+68
+00:03:54,018 --> 00:03:58,168
+Accuracy, TPR and FPR all depend on the threshold.
+
+69
+00:03:58,168 --> 00:04:04,394
+Lower it, and the model predicts more positives, so TPR and FPR both go up.
+
+70
+00:04:06,000 --> 00:04:08,542
+So where does the ROC curve come from?
+
+71
+00:04:08,542 --> 00:04:13,225
+A model gives every observation a score, like a predicted probability.
+
+72
+00:04:13,225 --> 00:04:15,768
+Negatives, in blue, tend to score low.
+
+73
+00:04:15,768 --> 00:04:18,511
+Positives, in orange, tend to score high.
+
+74
+00:04:18,511 --> 00:04:23,060
+Pick a threshold, and everything to its right is predicted positive.
+
+75
+00:04:23,820 --> 00:04:28,764
+The share of the orange curve to the right of the line is the true positive rate.
+
+76
+00:04:28,764 --> 00:04:32,914
+The share of the blue curve to the right is the false positive rate.
+
+77
+00:04:32,914 --> 00:04:35,722
+Together, they make one point on the ROC plot.
+
+78
+00:04:36,487 --> 00:04:38,384
+Now slide the threshold down.
+
+79
+00:04:38,384 --> 00:04:42,767
+The model catches more positives, but it also flags more negatives,
+
+80
+00:04:42,767 --> 00:04:45,319
+so the point moves up and to the right.
+
+81
+00:04:45,319 --> 00:04:49,899
+A very high threshold predicts nothing positive: the point zero, zero.
+
+82
+00:04:49,899 --> 00:04:54,086
+A very low one predicts everything positive: the point one, one.
+
+83
+00:04:54,086 --> 00:04:57,226
+Every threshold in between traces out the curve.
+
+84
+00:04:57,987 --> 00:05:00,986
+The diagonal is what random guessing gets.
+
+85
+00:05:00,986 --> 00:05:06,698
+The area under the curve, the AUC, runs from 0.5 for guessing to 1 for a perfect
+
+86
+00:05:06,698 --> 00:05:07,126
+model.
+
+87
+00:05:07,126 --> 00:05:12,553
+It also equals the chance that a random positive scores higher than a random
+
+88
+00:05:12,553 --> 00:05:13,195
+negative.
+
+89
+00:05:14,800 --> 00:05:16,864
+Practice midterm one, question ten.
+
+90
+00:05:16,864 --> 00:05:20,696
+A doctor wants to minimize telling sick patients they're healthy,
+
+91
+00:05:20,696 --> 00:05:25,059
+while wrongly telling healthy patients they're sick at most half the time.
+
+92
+00:05:25,059 --> 00:05:26,828
+Which point should she choose?
+
+93
+00:05:28,387 --> 00:05:31,300
+First, translate the words into metrics.
+
+94
+00:05:31,300 --> 00:05:35,596
+Telling a sick patient they're healthy is a false negative,
+
+95
+00:05:35,596 --> 00:05:38,363
+so minimizing it means maximizing TPR.
+
+96
+00:05:38,363 --> 00:05:44,481
+Wrongly alarming healthy patients at most half the time means an FPR of at most 0.5.
+
+97
+00:05:45,253 --> 00:05:51,001
+Shade the allowed region, then move right along the curve as far as the limit
+
+98
+00:05:51,001 --> 00:05:54,211
+allows, since TPR never falls as FPR rises.
+
+99
+00:05:54,211 --> 00:05:57,272
+That's point B, with a TPR of about 0.88.
+
+100
+00:05:57,272 --> 00:05:59,511
+A is allowed but gives up TPR.
+
+101
+00:05:59,511 --> 00:06:03,020
+C sits on the diagonal, which is just guessing.
+
+102
+00:06:03,020 --> 00:06:04,737
+And D breaks the limit.
+
+103
+00:06:06,333 --> 00:06:07,360
+One more trap.
+
+104
+00:06:07,360 --> 00:06:11,832
+A higher AUC does not make a model better at every threshold,
+
+105
+00:06:11,832 --> 00:06:13,958
+because ROC curves can cross.
+
+106
+00:06:13,958 --> 00:06:16,450
+Here, model A has the larger area.
+
+107
+00:06:17,220 --> 00:06:22,459
+But if you need an FPR below about 0.25, model B catches more positives.
+
+108
+00:06:22,459 --> 00:06:26,825
+Question fifteen on practice midterm two tests exactly this.
+
+109
+00:06:26,825 --> 00:06:30,900
+Read both curves over the range the question asks about,
+
+110
+00:06:30,900 --> 00:06:34,319
+and pick the one that gets there with less FPR.
+
+111
+00:06:35,933 --> 00:06:40,508
+Practice midterm one, question eleven, uses two normal curves.
+
+112
+00:06:40,508 --> 00:06:44,050
+Class one, the positive class, is centered at 4.
+
+113
+00:06:44,050 --> 00:06:47,740
+Class two, the negative class, is centered at 5.5.
+
+114
+00:06:47,740 --> 00:06:51,208
+The rule predicts positive when x is below 4.3,
+
+115
+00:06:51,208 --> 00:06:54,233
+so here the positive side is on the left.
+
+116
+00:06:54,987 --> 00:07:01,232
+The false positive rate is the negative class's area on the predicted positive
+
+117
+00:07:01,232 --> 00:07:03,794
+side, divided by its total area.
+
+118
+00:07:03,794 --> 00:07:10,440
+That's the blue area left of 4.3, which is the normal CDF at minus 1.2, about 0.12.
+
+119
+00:07:11,220 --> 00:07:16,393
+The true positive rate is the same idea for the positive class.
+
+120
+00:07:16,393 --> 00:07:19,841
+The orange area left of 4.3 is about 0.62.
+
+121
+00:07:20,620 --> 00:07:23,795
+On the exam's lettered figure, that region is B,
+
+122
+00:07:23,795 --> 00:07:27,036
+and the whole class two curve is B plus D plus E.
+
+123
+00:07:27,036 --> 00:07:28,292
+So the answer is D.
+
+124
+00:07:28,292 --> 00:07:32,128
+The tempting option A is actually the false negative rate.
+
+125
+00:07:33,733 --> 00:07:34,395
+To recap.
+
+126
+00:07:34,395 --> 00:07:39,908
+TPR uses only the actual positives, and FPR uses only the actual negatives.
+
+127
+00:07:39,908 --> 00:07:43,143
+The baseline predicts the training majority,
+
+128
+00:07:43,143 --> 00:07:48,215
+and on imbalanced data it can win on accuracy while catching nothing.
+
+129
+00:07:48,215 --> 00:07:54,022
+Lowering the threshold raises both rates, and sweeping it traces the ROC curve.
+
+130
+00:07:54,022 --> 00:07:57,551
+An AUC of 0.5 is guessing, and curves can cross.
+
+131
+00:07:57,551 --> 00:08:01,447
+Under an FPR limit, take the rightmost allowed point.
+
+132
+00:08:01,447 --> 00:08:05,196
+Next, we'll turn dollars into the threshold itself.
